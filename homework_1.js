@@ -1,7 +1,7 @@
 // Домашняя работа по итогам урока 1
 
 /*
-let newName = "Eva";
+let newName = "Eva"; //Лучше использовать const, так как знач переменной меняться не будет
 console.log(`Имя: ${newName}`);
 
 let newAge = 35;
@@ -53,9 +53,9 @@ console.log(lastNumber);
 console.log(5 > 4);
 console.log("ананас" > "яблоко");
 console.log("2" > "12");
-console.log(undefined == null);
 console.log(undefined === null);
-console.log(null == "0");
+console.log(undefined === null);
+console.log(null === "0");
 console.log(null === +"0");
 
 */
