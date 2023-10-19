@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #square {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+        }
+        #main {
+            width: 500px;
+            height: 300px;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div id = "main"></div>
+</body>
+<script>
+    // console.log("Старт");
+    // const listPromise = fetch('https://api.sampleapis.com/csscolornames/colors');
+    // listPromise
+    // .then(data => data.json())
+    // .then(colors => {
+    // newObjects(colors);
+    // console.log(colors);
+    // }) .catch(err => {
+    //     console.log('Error', err);
+    // })
+    // //catch вверху выводит нам в консоль ошибку, если что-то не так
+
+    // // Метод, который окрасит наши дивы в разные цвета
+
+    // // значение colors, которое мы получили ранее после обработки промиса
+    // function newObjects(colors) {
+    //     for(const color of colors) {
+    //         let div = document.createElement('div');
+    //         div.id = "square";
+    //         div.style.backgroundColor = color.hex;
+    //         div.innerHTML = color.hex;
+    //         document.getElementById("main").appendChild(div);
+
+    //     }
+    // }
+
+        function sleepTime(time) {
+            return new Promise((resolve, reject) => {
+                if(time < 700) {
+                    reject ('Not enouth!');
+            }
+            setTimeout(() => resolve(`I slept ${time}`), time);
+        })
+    }
+    
+    // слово async говорит интерпретатору, что будет происходит обработка промисов
+    // слово await говорит ему, что придется подождать, пока будет вычислено значение функции
+    // аналогично .then, только он используется, когда наши данные готовы к работе (выгружены, подгружены)
+    // await нельзя использовать без async
+    // await нельзя использовать вне асинхр. функции
+
+    async function handlerSleep() {
+        try {
+        let sleepTime1 = await sleepTime(2000);
+        console.log(sleepTime1);
+        let sleepTime2 = await sleepTime(1500);
+        console.log(sleepTime2);
+        let sleepTime3 = await sleepTime(1000);
+        console.log(sleepTime3);
+        let sleepTime4 = await sleepTime(500);
+        console.log(sleepTime4);
+    }
+        catch(err) {
+            console.log(err);
+        }
+    }
+    handlerSleep();
+    </script>
+</html>
