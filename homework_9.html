@@ -1,4 +1,4 @@
-<!-- Домашнее задание к уроку 9 Вариант преподавателя-->
+<!-- Домашнее задание к уроку 9-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
     
 </body>
 <script>
-    function loadNewScript(src, callback) {
+    function NewScript(src, callback) {
         let script = document.createElement('script');
         script.src = src;
 
@@ -21,7 +21,7 @@
 
         document.head.append(script);
     }
-    loadNewScript('MyHomeworScript.js', function(error, script) {
+    NewScript('MyHomeworScript.js', function(error, script) {
         if (error) {
             alert(error);
         } else {

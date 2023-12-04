@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // массивы
+      console.log("==Деструктуризация массива==");
+      let users = ["J.Bond", "J.Sparrow"];
+
+      // деструктуризирующее присваивание
+      let [user1, user2] = users;
+      console.log("Деструктуризирующее присваивание:" + user1 + " и " + user2);
+      // иначе
+      console.log("Вывод элементов массива с помощью цикла: ");
+      for (let i = 0; i < users.length; i++) {
+        console.log(users[i] + " ");
+      }
+
+      console.log("==Функции, возвращающие массив==");
+      let str = "live long and prosper";
+      let [live, long, and, prosper] = str.split(" ");
+      console.log(prosper, and, live, long);
+
+      // Элементы можно пропускать
+      console.log("==Пропускаем элементы==");
+      [live, long, , prosper] = str.split(" ");
+      console.log(live, long + ", " + prosper);
+
+      // Можем работать с любым перебираемым объектом
+      console.log("==Деструктурируем перебираемые объекты==");
+      let [one, two, three] = "123";
+      console.log(one, two, three);
+
+      // оператор "остаточные параметры"
+      console.log("==Остаточные параметры==");
+      let [noun, verb, ...other] = ["I'm", "gonna", "make", "him", "an", "offer", "he", "can't", "refuse"]; // other стоит на последнем месте и деструктурирующем присваивании
+      console.log(noun, verb, other); // переменная, в которую мы помещаем остаток, должна стоять в конце.
+      console.log(other.length);
+
+      // если элементов в массиве меньше
+      console.log("==Элементов в массиве меньше==");
+      [one, two, three] = ["one", "two"];
+      console.log(one, two, three);
+
+      // значения по умолчанию
+      console.log('==Значения по умолчанию==');
+      [one, two, three = 'three'] = ['one', 'two',];
+      console.log(one, two, three);
+
+      
+      [one, two, three = 'three'] = ['one', 'two', 'ten'];
+      console.log(one, two, three);  // значение по умолчанию будет затерто при присваивании нового значения
+
+      
+      //Помимо массивов можно деструкторировать объекты
+
+      // объекты
+
+      console.log('==Деструктуризация объекта==');
+      let user = {
+        name: "John",
+        email: "user_email@email.com",
+        age: 27
+      };
+
+      let {name, email, age} = user;
+      console.log(name, email, age);
+
+      // можно через let перезназначить переменные
+
+      let {email: userEmail, age: userAge, name: userName} = {name: "John", email: "user_email@email.com", age: 27}
+      console.log(userEmail, userAge, userName);
+
+      // значение по умолчанию
+
+      let user3 = {
+        name: "Anna",
+      };
+      let {name: nameUser, email:emailUser = "user_email@gmail.com", age: ageUser = 27} = user3;
+      console.log(nameUser);
+      console.log(emailUser);
+      console.log(ageUser);
+      
+    </script>
+  </body>
+</html>

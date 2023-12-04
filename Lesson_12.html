@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .comment {
+            width: 50%;
+            height: 150px;
+            padding: 10px;
+            outline: 0;
+            border: 2px solid #1c87c9;
+            background: #bccde2d1;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+        // COOKIES
+
+       /*  // чтение кукис
+        let cookies = document.cookie;
+        console.log(cookie);
+
+        //создадим куки
+        document.cookie = "user = Anna";
+        document.cookie = "date = 18.07.2022";
+        document.cookie = "age = 21";
+        document.cookie = "user = Angela";
+        console.log(document.cookie);
+
+        // корректная запись кукисов
+        let str1 = "Phrasewith";
+        let str2 = "spaces inside";
+
+        console.log(document.cookie = encodeURIComponent(str1) + '=' + encodeURIComponent(str2));
+        console.log(document.cookie = str1 + '=' + str2);
+
+        // настройки - косая черта указывает, что у всех папок
+        // expires - срок жизни куки, если его нет, то куки удаляться сразу после закрытия браузера
+
+
+        document.cookie = "user = Anna; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT";
+        // настройки, кот используются реже, но тоже важны
+        //domain=site.com; max-age=3600; secure; samesite
+        console.log(document.cookie);
+
+        //cookies со сроком жизни в 1 месяц
+        document.cookie = "name=user; max-age=2629743";
+        
+        /* или */
+     
+        /* var cookie_date = new Date();
+        cookie_date.setMonth(cookie_date.getMonth() + 1);
+        document.cookie = "name-user; expires=" + cookie_date.toUTCString(); */ 
+
+        // LOCAL STORAGE
+        area.value = localStorage.getItem('area');
+        area.oninput = () => {
+            localStorage.setItem('area', area.value)
+        };
+       
+        const answerForEverything = 42;
+        console.log(typeof answerForEverything);
+        localStorage.setItem('number', answerForEverything);
+        console.log(typeof localStorage.getItem('number'));
+
+
+            // Нюансы
+        
+            let newUser = {
+                userName: 'Anna',
+                userAge: 27
+            }
+            localStorage.setItem('newUser', JSON.stringify(newUser)); // в localStorage получим object
+            console.log(localStorage.getItem('newUser'));
+            console.log ('Тип переменной после сохранения: ' + typeof localStorage.getItem('newUser'));
+
+            let newVar = JSON.parse(localStorage.getItem('newUser'));
+            console.log(newVar);
+            newVar.userAge = 18;
+            console.log(newVar);
+
+            // получить все ключи и значения
+            for(let i=0; 1<localStorage.length; i++) {
+                let key = localStorage.key(1);
+                console.log(`${key}: ${localStorage.getItem(key)}`);
+            }
+
+            // события
+            window.addEventListener('storage', event => {
+                console.log(event);
+            })
+        /*
+        setItem (key, value) - сохранить пару ключ/значение.
+        getItem (key) - получить данные по ключю key.
+        removeItem (key) - удалить данные с ключом key.
+        clear() - удалить все.
+        key (index) - получить ключ на заданной позиции.
+        length- количество элементов в хранилище.
+        */
+    
+    </script>
+
+    <textarea class = "comment" id ="area" placeholder ="Напишите сообщение здесь">
+
+    </textarea>
+    <br>
+    <button onclick = "localStorage.removeItem('area'); area.value ='' ">Очистить</button>
+</body>
+</html>

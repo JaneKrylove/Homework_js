@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson_13</title>
+  </head>
+  <body>
+    <script>
+      let requestOpen = indexedDB.open("app", 2);
+      /*
+        Синтаксис
+            indexedDB.open (name, version) - имя, версия бд (значение по умолчанию 1, всегда целое число)
+
+            Типы событий:
+            success - БД готова к работе
+            error - не удалось открыть БД
+            upgradeneeded - БД открыта, но требуется обновление
+        */
+
+      /* Рассмотрим обработки событий OpenRequest  Если все верно, то у стрелочки IndexedDB появится стрелочка, а в консоли два сообщения*/
+
+      requestOpen.onerror = function (event) {
+        console.error("Error", requestOpen.error);
+      };
+
+      requestOpen.onsuccess = function (event) {
+        db = requestOpen.result;
+        console.log("Мы внутри бд!");
+      };
+
+      /* при первичной инициализации событие о необходимости апгрейда наступает первым */
+
+      requestOpen.onupgradeneeded = function (event) {
+        db = requestOpen.result;
+        // console.log("Мы в обработчике обновлений");
+
+        // создадим хранилище: books - имя хранилища, {autoIncrement: true} - значение ключа
+
+        db.createObjectStore("books", { autoIncrement: true });
+        console.log("Хранилище успешно создано!");
+
+        db.deleteObjectStore("books");
+      };
+      //     db = requestOpen.result;
+      //     switch (event.OldVersion) {
+      //       case 0:
+      //         console.log("База данных инициализирована");
+      //       case 1:
+      //         db.createObjectStore("books", { autoIncrement: true });
+      //         console.log("Хранилище успешно создано!");
+      //       case 2:
+      //         db.deleteObjectStore("books");
+      //       case 3:
+      //         db.createObjectStore("bookStore", { autoIncrement: true });
+      //     }
+      //   };
+
+      //   /* Синтаксис транзакций
+      /* db.transaction(store[, type]);
+      store - название хранилища;
+      type - тип транзации, один из:
+      readonly - только чтение, по умолчанию;
+      readwrite -только чтение и запись данных.
+      versionchange - недоступно для ручного создания */
+
+      /* Создадим транзакцию */
+
+      // transaction - метод, bookstore - имя хранилища, readwrite - тип транзакции
+      //   let transaction = db.transaction("bookstore", "readwrite");
+      //сохраняем объект транзакции
+      //   let books = transaction.objectStore("bookStore");
+
+      // создаем объект book и указываем стоимость, название, дата создания записи
+      //   let book = {
+      //     title: "War and piece",
+      //     cost: 25,
+      //     created: new Date(),
+      //   };
+
+      //чтобы сохранить данные, мы можем воспользоваться методом add или методом put (value, [key])
+      // метод put заменит данные, если они уже были ранее; метод add выдаст ошибку, так как данные уже есть
+      // request - запрос
+
+      //   let request = books.add(book);
+
+      // необходимо создать обработчики событий
+      // успех
+      /*  reguest.onsuccess = function () {
+        console.log("Книга успешно добавлена", request.result);
+      }; */
+
+      // ошибка
+      /*  request.onerror = function () {
+        console.log("Ошибка", request.error);
+      }; */
+
+      // requestOpen.onupgradeneeded = function(event) {
+      //     db = requestOpen.result;
+      //     switch(event.oldVersion {
+      //         case 0:
+      //     })
+      // }
+
+      // Поиск элементов по ключу
+
+      // Получим одну книгу с точным названием ключа
+      let reguest = books.get(1);
+
+      // также создадим обоаботчики событий
+      // успех
+      request1.onsuccess = function() {
+        console.log("Книга найдена", request1.result);
+      };
+      // неуспех
+      request1.onerror = function() {
+        console.log("Ошибка", request1.error);
+      };
+
+      // Получим книги в диапазоне от id < 5 и до конечной
+
+      let reguest2 = books.getAll(IDBKeyRange.upperBound(5, true))
+      
+      reguest.onsuccess = function() {
+        console.log("Книги в диапазоне найдены", reguest2.result);
+      };
+
+      reguest2.onerror = function() {
+        console.log("Ошибка", reguest2.error);
+      };
+
+      // Получить все книги
+
+      let request3 = books.getAll
+      
+      request3.onsuccess = function() {
+        console.log("Книги найдены", request3.result);
+      };
+
+      request3.onerror = function() {
+        console.og("Ошибка", request3.error);
+      };
+
+      // Поиск элементов по индексу
+
+      requestOpen.onupgradeneeded = function(event) {
+        db = requestOpen.result;
+        switch(event.oldVersion) {
+            case 0:
+                console.log('База данных инициализирована');
+            case 1:
+                db.createObjectStore('books', {autoIncrement: true});
+                console.log('Хранилище успешно создано!');
+            case 2:
+                db.deleteObjectStore('books');
+            case 3:
+                db.createObjectStore('bookStore', {autoIncrement: true});
+            case 4:
+                db.deleteObjectStore('bookStore');
+                let bookStore = db.createObjectStore('bookStore', {autoIncrement: true});
+                // синтаксис создания индекса: objectStore.createIndex(name, keyPath, [options]);
+                let index = bookStore.createIndex('indexCost', 'cost');
+        }
+      }
+
+      // удаление данных в БД
+
+     // let requestDelete= bookStore.delete(reguest.result);
+
+      // Удаление всей базы данных
+      let requestDelete = indexedDB.deleteDatabase('app');
+          requestDelete.onsuccess = function() {
+            console.log("База данных успешно удалена");
+        };
+        requestDelete.onerror = function() {
+            consoLe.Log("Не удалось удалить базу данных");
+        };
+    </script>
+  </body>
+</html>
