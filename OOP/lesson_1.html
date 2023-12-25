@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        // объявление одиночного объекта
+        let book = {
+            title: 'Anna Karenina',
+            author: 'L. Tolstoy',
+            annotation: function() {
+                console.log(`Автором книги ${this.title} является ${this.author}`) // this значит, что используются значения из этого объекта (book)                
+            }
+        }
+
+        book.annotation();
+
+        let book1 = {
+            title: 'War and Peace',
+            author: 'L. Tolstoy',
+            annotation: function() {
+                console.log(`Автором книги ${this.title} является ${this.author}`) // this значит, что используются значения из этого объекта (book)                
+            }
+        }
+
+        book1.annotation();
+
+        // для описания объектов по сути используется один и тот же код. можно воспользоваться функциями
+        // функциональный способ создания объекта
+
+        function Book(author, title) {
+            this.author = author;
+            this.title = title;
+        }
+
+        let book4 = new Book('L. Tolstoy', 'War and Peace');
+        let book5 = new Book('L. Tolstoy', 'Anna Karenina');
+        console.log(book4);
+
+        
+        
+      //класс
+
+      class BookClass {
+        constructor(author = "A.Pushkin", title = "The Captains Dauther") {
+          this.author = author;
+          this.title = title;
+        }
+        showBook() {
+          console.log(`${this.title} is written by ${this.author}`);
+        }
+      }
+
+      // использование
+
+      let book4 = new BookClass("Anna Karenina", "L.Tolstoy");
+      book4.showBook();
+      let book5 = new BookClass();
+      book5.showBook();
+
+      console.log(typeof BookClass);
+
+      */
+
+      // более сложный пример
+      // приватные свойства классов
+
+      class User {
+        #password; // приватное свойство
+        constructor(email, password) {
+          this.email = email;
+          this.#password = password;
+        }
+
+        login(email, password) {
+          if (email === this.email && password === this.#password) {
+            console.log("Login Successfully");
+          } else {
+            console.log("Authentication Failed!!");
+          }
+        }
+
+        resetPassword(newPassword) {
+          this.#password = newPassword;
+        }
+
+        logout() {}
+      };
+
+
+    const user = new User('user@mail.com', 'password');
+    user.login('user@mail.com', 'password');
+
+    console.log(user.email);
+    console.log(user.password);
+
+    user.resetPassword('new_password');
+    user.login('user@mail.com', 'password');
+    user.login('user@mail.com', 'new_password');
+
+    class Author extends User {
+        #numOfPost;
+        constructor(email, password) {
+            super(email, password);
+            this.#numOfPost = 0;
+        }
+
+        createPost(content) {
+            this.#numOfPost++;
+            console.log(content);
+        }
+
+        getNumOfPost() {
+            return this.#numOfPost;
+        }
+    }
+
+    const user1 = new Author('user@mail.com', 'password');
+    user1.login('user1@mail.com', 'password');
+    user1.createPost('L.Tolstoy is the Russian author');
+    console.log(user1.getNumOfPost());
+
+    </script>
+  </body>
+</html>

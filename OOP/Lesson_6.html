@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson6</title>
+</head>
+<body>
+
+    <script>
+
+        // тестовая строка
+
+        let str = "This is test string";
+
+        // объявление
+        let regExp = new RegExp('test'); // с помощью конструктора объекта, динамическая
+        let regExp1 = /test/; // с помощью слэшей, статическая, ее нельзя будет изменить
+
+        console.log(str.match(regExp)[0]); // возвращает массив совпадений
+        console.log(regExp.test(str)); // возвращает булевое значение
+
+        console.log(str.match(regExp1)[0]); // возвращает массив совпадений
+        console.log('Test: '+ regExp1.test(str)); // возвращает булевое значение
+
+
+        // флаги. компоненты, которые позволяют выполнить проверки регулярных выражений
+
+        // i - не зависимый от регистра поиск
+
+        regExp = new RegExp('Test', 'i');
+        regExp = /Test/i;
+
+        console.log(regExp.test(str)); //true
+        console.log(str.match(regExp1)[0]); //test*/
+
+        // g - поиск по всем совпадениям, а не только по первому
+
+        let str1 = "Alone in a wide, wide sea";
+        regExp = new RegExp('wide', ig);
+        regExp1 = /wide/ig;
+        console.log(regExp.test(str1)); //true
+        console.log(str1.match(regExp)[0]); //wide
+        console.log(str1.match(regExp).length);
+
+        // m - мультистрочный поиск
+
+        let str2 = `1 puppy
+        2 puppy
+        3 puppy
+        4 puppy`;
+
+         console.log(str2.match(/^\d/g));
+         console.log(str2.match(/^\d/g).length);
+
+
+         // методы, которые взаимодействуют с регулярными выражениями
+
+
+         // match
+
+         
+
+
+
+
+    
+
+
+    </script>
+    
+</body>
+</html>
